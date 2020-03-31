@@ -11,26 +11,26 @@ class ApartmentTest < MiniTest::Test
   def test_apartment_number
     assert_equal "A1", @unit1.numer
   end
-  # pry(main)> unit1 = Apartment.new({number: "A1", monthly_rent: 1200, bathrooms: 1, bedrooms: 1})
-  # # => #<Apartment:0x00007fb3ecaae7c0...>
-  #
-  # pry(main)> unit1.number
-  # # => "A1"
-  #
-  # pry(main)> unit1.monthly_rent
-  # # => 1200
-  #
-  # pry(main)> unit1.bathrooms
-  # # => 1
-  #
-  # pry(main)> unit1.bedrooms
-  # # => 1
-  #
-  # pry(main)> unit1.renter
-  # # => nil
-  #
-  # pry(main)> unit1.add_renter(renter1)
-  #
-  # pry(main)> unit1.renter
-  # # => #<Renter:0x00007fb3ee106ce8...>
+
+  def test_monthly_rent
+     assert_equal 1200, @unit1.monthly_rent
+  end
+
+  def test_number_of_bathrooms
+     assert_equal 1, @unit1.bathrooms
+  end
+
+  def test_unit_bedrooms
+    assert_equal 1, @unit1.bedrooms
+  end
+
+  def test_unit_renter_object
+    assert_equal nil, @unit1.renter
+  end
+
+  def test_add_renter
+    renter1 = Renter.new("Jessie")
+    @unit1.add_renter(renter1)
+    assert_equal renter1, @unit1.renter
+  end
 end
