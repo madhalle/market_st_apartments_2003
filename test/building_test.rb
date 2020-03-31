@@ -8,10 +8,15 @@ class BuildingTest < MiniTest::Test
 
   def setup
     @building = Building.new
+
     @unit1 = Apartment.new({number: "A1", monthly_rent: 1200, bathrooms: 1, bedrooms: 1})
     @unit2 = Apartment.new({number: "B2", monthly_rent: 999, bathrooms: 1, bedrooms: 2})
     @unit3 = Apartment.new({number: "C3", monthly_rent: 1150, bathrooms: 2, bedrooms: 2})
     @unit4 = Apartment.new({number: "D4", monthly_rent: 1500, bathrooms: 2, bedrooms: 3})
+
+    @renter1 = Renter.new("Aurora")
+    @renter2 = Renter.new("Tim")
+
   end
 
   def test_it_exists
@@ -32,25 +37,21 @@ class BuildingTest < MiniTest::Test
 
     assert_equal [], @building.renters
 
-    renter1 = Renter.new("Aurora")
-    @unit1.add_renter(renter1)
+    @unit1.add_renter(@renter1)
     @building.add_unit(@unit1)
     assert_equal ["Aurora"], @building.renters
 
-    renter2 = Renter.new("Tim")
-    @unit2.add_renter(renter2)
+    @unit2.add_renter(@renter2)
     @building.add_unit(@unit2)
     assert_equal ["Aurora", "Tim"], @building.renters
   end
 
   def test_building_average_rent
-    renter1 = Renter.new("Aurora")
-    @unit1.add_renter(renter1)
+    @unit1.add_renter(@renter1)
     @building.add_unit(@unit1)
     assert_equal ["Aurora"], @building.renters
 
-    renter2 = Renter.new("Tim")
-    @unit2.add_renter(renter2)
+    @unit2.add_renter(@renter2)
     @building.add_unit(@unit2)
     assert_equal 1099.5, @building.average_rent
   end
@@ -66,6 +67,7 @@ class BuildingTest < MiniTest::Test
   end
 
   def test_renter_with_highest_rent
+
     @building.add_unit(@unit1)
     @building.add_unit(@unit2)
     @building.add_unit(@unit3)
@@ -82,6 +84,7 @@ class BuildingTest < MiniTest::Test
   end
 
   def test_building_units_by_number_of_bedrooms
+  skip
     @building.add_unit(@unit1)
     @building.add_unit(@unit2)
     @building.add_unit(@unit3)
@@ -91,9 +94,7 @@ class BuildingTest < MiniTest::Test
 
 
 
-  #
-  # pry(main)> building.add_unit(unit4)
-  #
+
   # pry(main)> building.units_by_number_of_bedrooms
   # # =>
   # # {
