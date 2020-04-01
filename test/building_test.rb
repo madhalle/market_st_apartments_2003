@@ -19,6 +19,7 @@ class BuildingTest < MiniTest::Test
 
   end
 
+
   def test_it_exists
     assert_instance_of Building, @building
   end
@@ -33,13 +34,18 @@ class BuildingTest < MiniTest::Test
     assert_equal [@unit1, @unit2], @building.units
   end
 
-  def test_building_renters
+  def test_building_renters_single
 
     assert_equal [], @building.renters
 
     @unit1.add_renter(@renter1)
     @building.add_unit(@unit1)
     assert_equal ["Aurora"], @building.renters
+  end
+
+  def test_building_renters
+    @unit1.add_renter(@renter1)
+    @building.add_unit(@unit1)
 
     @unit2.add_renter(@renter2)
     @building.add_unit(@unit2)
@@ -67,7 +73,6 @@ class BuildingTest < MiniTest::Test
   end
 
   def test_renter_with_highest_rent
-
     @building.add_unit(@unit1)
     @building.add_unit(@unit2)
     @building.add_unit(@unit3)
@@ -84,7 +89,7 @@ class BuildingTest < MiniTest::Test
   end
 
   def test_building_units_by_number_of_bedrooms
-  skip
+
     @building.add_unit(@unit1)
     @building.add_unit(@unit2)
     @building.add_unit(@unit3)

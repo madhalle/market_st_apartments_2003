@@ -7,9 +7,15 @@ class Building
 
   def add_unit(unit)
     @units << unit
-    if unit.renter != nil
-      @renters << unit.renter.name
+  end
+
+  def renters
+    @units.each do |unit|
+      if unit.renter != nil
+        @renters << unit.renter.name
+      end
     end
+    @renters
   end
 
   def average_rent
@@ -48,6 +54,31 @@ class Building
     highest_rent
   end
 
+  def units_by_number_of_bedrooms
+    @units.group_by do |unit|
+      unit.bedrooms
+    #require "pry"; binding.pry
+    end
+  end
+  # def units_by_number_of_bedrooms
+  #   three_bedroom = []
+  #   two_bedroom = []
+  #   one_bedroom = []
+  #   keys = []
+  #   @units.each do |unit|
+  #     three_bedroom << unit.number if unit.bedrooms == 3
+  #     two_bedroom << unit.number if unit.bedrooms == 2
+  #     one_bedroom << unit.number if unit.bedrooms == 1
+  #     keys << unit.bedrooms
+  #   end
+  #   require "pry"; binding.pry
+  #   keys.sort.uniq
+  #   #[[:3, three_bedroom], [:2, two_bedroom], [:1, one_bedroom]].to_h
+  #   # a = [[:3, three_bedroom], [:2, two_bedroom], [:1, one_bedroom]]
+  #   # h = Hash[*a]
+  #   # h
+  # end
+
   # def units_by_number_of_bedrooms
   #   three_bedroom = []
   #   two_bedroom = []
@@ -57,12 +88,13 @@ class Building
   #     two_bedroom << unit.number if unit.bedrooms == 2
   #     one_bedroom << unit.number if unit.bedrooms == 1
   #   end
+  #   require "pry"; binding.pry
   #   #[[:3, three_bedroom], [:2, two_bedroom], [:1, one_bedroom]].to_h
-  #   a = [[:3, three_bedroom], [:2, two_bedroom], [:1, one_bedroom]]
-  #   h = Hash[*a]
-  #   h
+  #   # a = [[:3, three_bedroom], [:2, two_bedroom], [:1, one_bedroom]]
+  #   # h = Hash[*a]
+  #   # h
   # end
-
+  #
   # def units_by_number_of_bedrooms
   #   sorted_by_bedroom = []
   #   @units.group_by do |unit|
@@ -71,7 +103,7 @@ class Building
   #   end
   #   require "pry"; binding.pry
   #   breakdown = {}
-  #   @units.bedrooms.uniq.each do |bedroom|
+  #   @units.bedrooms.each do |bedroom|
   #    breakdown[bedroom] = units_by_number_of_bedrooms(bedroom)
   #   end
   #   breakdown

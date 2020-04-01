@@ -11,4 +11,11 @@ class RenterTest < Minitest::Test
     assert_equal "Jessie", @renter1.name
   end
 
+  ## Iteration 1
+
+  # Use TDD to create a Renter class and an Apartment class that respond to the following interaction pattern:
+  #
+  # ```ruby
+  # pr
+
 end
